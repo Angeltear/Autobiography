@@ -26,5 +26,15 @@ namespace Autobiography.Controllers
 
             return View();
         }
+
+        public ActionResult Education()
+        {
+            return View();
+        }
+
+        public ActionResult Expertise()
+        {
+            return View();
+        }
     }
 }

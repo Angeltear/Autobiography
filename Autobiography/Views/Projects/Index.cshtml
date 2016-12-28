@@ -1,30 +1,40 @@
 ﻿@model IEnumerable<Autobiography.Models.Projects>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Projects";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="text-success">
+    <h2><u>Projects</u></h2>
+</div>
+<br />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<table style="display:table; width:100%">
+    <tr style="border-bottom: 1px solid #ccc">
+        <td>
+            <h4> <strong>  @Html.DisplayNameFor(model => model.Title) </strong> </h4>
+        </td>
+        <td>
+            <h4>  <strong> @Html.DisplayNameFor(model => model.Type) </strong></h4>
+        </td>
+        <td>
+            <h4>  <strong> @Html.DisplayNameFor(model => model.Website) </strong> </h4>
+        </td>
+        <td>
+            <h4>  <strong> @Html.DisplayNameFor(model => model.GitHub) </strong> </h4>
+        </td>
+        <td></td>
+    </tr>
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Website)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GitHub)
-        </th>
-        <th></th>
+        <td>
+            <p></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p></p>
+        </td>
     </tr>
 
 @foreach (var item in Model) {
@@ -36,15 +46,23 @@
             @Html.DisplayFor(modelItem => item.Type)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Website)
+            <a href="@Html.DisplayFor(modelItem => item.Website)">   @Html.DisplayFor(modelItem => item.Website) </a>
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.GitHub)
+            <a href="@Html.DisplayFor(modelItem => item.GitHub)"> @Html.DisplayFor(modelItem => item.GitHub) </a>
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            <p><a class="btn btn-default" href="@Url.Action("Details", "Projects", new {id=item.ID })" >Details</a></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p></p>
         </td>
     </tr>
 }
