@@ -29,5 +29,7 @@ namespace Autobiography.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Autobiography.Models.Projects> Projects { get; set; }
     }
 }
