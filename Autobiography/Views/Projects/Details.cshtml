@@ -17,12 +17,13 @@
         </dt>
 
         <dd>
-            @*@Html.DisplayFor(model => model.Project.Type)*@ 
-            
+            @*@Html.DisplayFor(model => model.Project.Type)*@
 
-           @foreach (var item in Model) {
-               @Html.DisplayFor(model => item.Project.Type)
-           }
+
+            @foreach (var item in Model)
+            {
+                @Html.DisplayFor(model => item.Project.Type)
+            }
         </dd>
         <br />
         <dt>
@@ -55,37 +56,37 @@
         </dd>
         <br />
         <dt>
-           Comments
+            Comments
         </dt>
 
         <dd>
-            @*@Html.DisplayFor(model => model.Comments.CommentContent)*@ 
+            @*@Html.DisplayFor(model => model.Comments.CommentContent)*@
             @*@foreach (var item in Model)
-            {
-                @Html.DisplayFor(model => item.Comments.CommentContent)
-            }*@
+                {
+                    @Html.DisplayFor(model => item.Comments.CommentContent)
+                }*@
             <table>
                 <br />
-                    <tr style="border-bottom: 1px solid #ccc">
-                        <th>Comment</th>
-                        <td>
-                            <p></p>
-                        </td>
-                        <th>Submitted by</th>
-                    </tr>
+                <tr style="border-bottom: 1px solid #ccc">
+                    <th>Comment</th>
+                    <td>
+                        <p></p>
+                    </td>
+                    <th>Submitted by</th>
+                </tr>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td>
-                        @item.Comments.CommentContent
-                    </td>
-                    <td>
-                        <p>&nbsp; &nbsp; &nbsp;</p>
-                    </td>
-                    <td>
-                        @item.Comments.SubmittedBy
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            @item.Comments.CommentContent
+                        </td>
+                        <td>
+                            <p>&nbsp; &nbsp; &nbsp;</p>
+                        </td>
+                        <td>
+                            @item.Comments.SubmittedBy
+                        </td>
+                    </tr>
                 }
             </table>
 
