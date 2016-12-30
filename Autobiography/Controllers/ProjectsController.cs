@@ -27,12 +27,26 @@ namespace Autobiography.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //Projects projects = db.Projects.Find(id);
+            Comment comments = new Comment();
+
             Projects projects = db.Projects.Find(id);
-            if (projects == null)
+
+            ProjectsViewModel pvm = new ProjectsViewModel();
+
+            var ViewM = from o in db.Projects join o2 in db.Comments on o.ID equals o2.ProjectID where o.ID == o2.ProjectID && o.ID == (int)id select new ProjectsViewModel { Project = o, Comments = o2 };
+
+            //pvm.Project.ID = projects.ID;
+            //pvm.Project.Title = projects.Title;
+            //pvm.Project.Type = projects.Title;
+            //pvm.Project.Website = projects.Website;
+            //pvm.Comments.ProjectID = projects.ID;
+
+            if (projects == null || pvm == null)
             {
                 return HttpNotFound();
             }
-            return View(projects);
+            return View(ViewM);
         }
 
         // GET: Projects/Create

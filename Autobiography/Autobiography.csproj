@@ -200,11 +200,20 @@
     <Compile Include="Migrations\201612281436371_Initial.Designer.cs">
       <DependentUpon>201612281436371_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612291233383_comments.cs" />
+    <Compile Include="Migrations\201612291233383_comments.Designer.cs">
+      <DependentUpon>201612291233383_comments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612291235559_commentsFK.cs" />
+    <Compile Include="Migrations\201612291235559_commentsFK.Designer.cs">
+      <DependentUpon>201612291235559_commentsFK.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Projects.cs" />
+    <Compile Include="Models\ProjectsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -306,6 +315,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612281436371_Initial.resx">
       <DependentUpon>201612281436371_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612291233383_comments.resx">
+      <DependentUpon>201612291233383_comments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612291235559_commentsFK.resx">
+      <DependentUpon>201612291235559_commentsFK.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

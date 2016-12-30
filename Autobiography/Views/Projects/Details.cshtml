@@ -1,51 +1,96 @@
-﻿@model Autobiography.Models.Projects
+﻿@model IEnumerable<Autobiography.Models.ProjectsViewModel>
+@*@model Autobiography.Models.ProjectsViewModel*@
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+@*<h2>@Html.DisplayFor(model => model.Project.Title)</h2>*@
 
 <div>
-    <h4>Projects</h4>
     <hr />
     <dl class="dl-horizontal">
+
         <dt>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.Project.Type)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+            @*@Html.DisplayFor(model => model.Project.Type)*@ 
+            
 
+           @foreach (var item in Model) {
+               @Html.DisplayFor(model => item.Project.Type)
+           }
+        </dd>
+        <br />
         <dt>
-            @Html.DisplayNameFor(model => model.Type)
+            @Html.DisplayNameFor(model => model.Project.Website)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
+            @*@Html.DisplayFor(model => model.Project.Website)*@
 
+
+            @foreach (var item in Model)
+            {
+                @Html.DisplayFor(model => item.Project.Website)
+            }
+
+        </dd>
+        <br />
         <dt>
-            @Html.DisplayNameFor(model => model.Website)
+            @Html.DisplayNameFor(model => model.Project.GitHub)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Website)
-        </dd>
+            @*@Html.DisplayFor(model => model.Project.GitHub)*@
 
+            @foreach (var item in Model)
+            {
+                @Html.DisplayFor(model => item.Project.GitHub)
+            }
+
+        </dd>
+        <br />
         <dt>
-            @Html.DisplayNameFor(model => model.GitHub)
+           Comments
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.GitHub)
+            @*@Html.DisplayFor(model => model.Comments.CommentContent)*@ 
+            @*@foreach (var item in Model)
+            {
+                @Html.DisplayFor(model => item.Comments.CommentContent)
+            }*@
+            <table>
+                <br />
+                    <tr style="border-bottom: 1px solid #ccc">
+                        <th>Comment</th>
+                        <td>
+                            <p></p>
+                        </td>
+                        <th>Submitted by</th>
+                    </tr>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @item.Comments.CommentContent
+                    </td>
+                    <td>
+                        <p>&nbsp; &nbsp; &nbsp;</p>
+                    </td>
+                    <td>
+                        @item.Comments.SubmittedBy
+                    </td>
+                </tr>
+                }
+            </table>
+
         </dd>
 
+        <br />
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

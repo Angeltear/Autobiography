@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Autobiography.Models
 {
@@ -9,5 +11,19 @@ namespace Autobiography.Models
         public string Type { get; set; }
         public string Website { get; set; }
         public string GitHub { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
+    }
+
+    public class Comment
+    {
+        public int CommentID { get; set; }
+        public string SubmittedBy { get; set; }
+        public string CommentContent { get; set; }
+
+        [ForeignKey("Projects")]
+        public int ProjectID { get; set; }
+
+        public Projects Projects { get; set; }
     }
 }
