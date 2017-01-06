@@ -6,7 +6,38 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*<h2>@Html.DisplayFor(model => model.Project.Title)</h2>*@
+<h2>@foreach (var item in Model)
+{
+    @Html.DisplayFor(model => item.Project.Title);
+    break;
+}</h2>
+
+@*<script>
+
+    function com() {
+        alert("opa");
+        var newComment = $('#txtComment').val();
+        alert(newComment);
+        var projId = "1";
+        alert(projId);
+        $.ajax({
+            url: '/Projects/AddComments',
+            contentType: 'application/html; charset=utf-8',
+            data: { id: projId, newComment: newComment },
+            type: 'GET',
+            dataType: 'html'
+
+        })
+            .success(function (result) {
+                $('#comments').html(result);
+                alert(status);
+                parent.document.getElementById("txtComment").value = "";
+            })
+            .error(function (xhr, status) {
+                alert(status);
+            })
+    };
+</script>*@
 
 <div>
     <hr />
@@ -22,7 +53,8 @@
 
             @foreach (var item in Model)
             {
-                @Html.DisplayFor(model => item.Project.Type)
+                @Html.DisplayFor(model => item.Project.Type);
+                break;
             }
         </dd>
         <br />
@@ -33,10 +65,11 @@
         <dd>
             @*@Html.DisplayFor(model => model.Project.Website)*@
 
-
+            
             @foreach (var item in Model)
             {
-                @Html.DisplayFor(model => item.Project.Website)
+                @Html.DisplayFor(model => item.Project.Website);
+                break;
             }
 
         </dd>
@@ -50,7 +83,8 @@
 
             @foreach (var item in Model)
             {
-                @Html.DisplayFor(model => item.Project.GitHub)
+                @Html.DisplayFor(model => item.Project.GitHub);
+                break;
             }
 
         </dd>
@@ -65,30 +99,61 @@
                 {
                     @Html.DisplayFor(model => item.Comments.CommentContent)
                 }*@
-            <table>
-                <br />
-                <tr style="border-bottom: 1px solid #ccc">
-                    <th>Comment</th>
-                    <td>
-                        <p></p>
-                    </td>
-                    <th>Submitted by</th>
-                </tr>
-                @foreach (var item in Model)
-                {
+            <div id="comments">
+
+
+                <table>
+                    <br />
+                    <tr style="border-bottom: 1px solid #ccc">
+                        <th>Comment</th>
+                        <td>
+                            <p></p>
+                        </td>
+                        <th>Submitted by</th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @item.Comments.CommentContent
+                            </td>
+                            <td>
+                                <p>&nbsp; &nbsp; &nbsp;</p>
+                            </td>
+                            <td>
+                                @item.Comments.SubmittedBy
+                            </td>
+                        </tr>
+                    }
+                </table>
+
+            </div>
+
+            <div id="addComment">
+                <hr />
+                @using (Html.BeginForm("Details", "Projects",FormMethod.Post)) {
+                
+                <table>
                     <tr>
                         <td>
-                            @item.Comments.CommentContent
-                        </td>
-                        <td>
-                            <p>&nbsp; &nbsp; &nbsp;</p>
-                        </td>
-                        <td>
-                            @item.Comments.SubmittedBy
+                            <textarea id="txtComment" name="txtComment" rows="4" cols="50"></textarea>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <p></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @*<input id="btnAddComment" name="btnAddComment" type="button" value="Add" class="btn btn-default" onclick="location.href='@Url.Action("AddComments", "Projects", new {id= Url.RequestContext.RouteData.Values["id"], newComment = ":)"})'"/>*@
+                            <input type="submit" value="Add" class="btn btn-default"/>
+                        </td>
+                    </tr>
+                </table>
+
                 }
-            </table>
+            </div>
 
         </dd>
 

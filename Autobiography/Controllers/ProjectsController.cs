@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Autobiography.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Autobiography.Controllers
 {
@@ -21,7 +22,7 @@ namespace Autobiography.Controllers
         }
 
         // GET: Projects/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string txtComment)
         {
             if (id == null)
             {
@@ -30,17 +31,21 @@ namespace Autobiography.Controllers
             //Projects projects = db.Projects.Find(id);
             Comment comments = new Comment();
 
+            if (!(String.IsNullOrEmpty(txtComment)))
+            {
+                comments.ProjectID = (int)id;
+                comments.CommentContent = txtComment;
+                comments.SubmittedBy = User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf("@"));
+
+                db.Comments.Add(comments);
+                db.SaveChanges();
+            }
+
             Projects projects = db.Projects.Find(id);
 
             ProjectsViewModel pvm = new ProjectsViewModel();
 
             var ViewM = from o in db.Projects join o2 in db.Comments on o.ID equals o2.ProjectID where o.ID == o2.ProjectID && o.ID == (int)id select new ProjectsViewModel { Project = o, Comments = o2 };
-
-            //pvm.Project.ID = projects.ID;
-            //pvm.Project.Title = projects.Title;
-            //pvm.Project.Type = projects.Title;
-            //pvm.Project.Website = projects.Website;
-            //pvm.Comments.ProjectID = projects.ID;
 
             if (projects == null || pvm == null)
             {
@@ -137,5 +142,23 @@ namespace Autobiography.Controllers
             }
             base.Dispose(disposing);
         }
+
+        //[HttpPost]
+        //public ActionResult AddComment(int id, string newComment)
+        //{
+        //    Comment comments = new Comment();
+
+        //    if (!(String.IsNullOrEmpty(newComment)))
+        //    {
+        //        comments.ProjectID = (int)id;
+        //        comments.CommentContent = newComment;
+        //        comments.SubmittedBy = User.Identity.GetUserName();
+
+        //        db.Comments.Add(comments);
+        //        db.SaveChanges();
+        //    }
+
+        //    return View("Details/" + id);
+        //}
     }
 }
