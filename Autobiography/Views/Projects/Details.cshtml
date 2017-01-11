@@ -129,31 +129,39 @@
 
             </div>
 
-            <div id="addComment">
-                <hr />
-                @using (Html.BeginForm("Details", "Projects",FormMethod.Post)) {
-                
-                <table>
-                    <tr>
-                        <td>
-                            <textarea id="txtComment" name="txtComment" rows="4" cols="50"></textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @*<input id="btnAddComment" name="btnAddComment" type="button" value="Add" class="btn btn-default" onclick="location.href='@Url.Action("AddComments", "Projects", new {id= Url.RequestContext.RouteData.Values["id"], newComment = ":)"})'"/>*@
-                            <input type="submit" value="Add" class="btn btn-default"/>
-                        </td>
-                    </tr>
-                </table>
+            @*@if (Request.Cookies["Cookie"] == null)
+            {*@
+                <div id="addComment">
+                    <hr />
+                    @using (Html.BeginForm("Details", "Projects", FormMethod.Post))
+                    {
 
-                }
-            </div>
+                    <table>
+                        <tr>
+                            <td>
+                                <textarea id="txtComment" name="txtComment" rows="4" cols="50"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @*<input id="btnAddComment" name="btnAddComment" type="button" value="Add" class="btn btn-default" onclick="location.href='@Url.Action("AddComments", "Projects", new {id= Url.RequestContext.RouteData.Values["id"], newComment = ":)"})'"/>*@
+                                <input type="submit" value="Add" class="btn btn-default"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                    }
+                </div>
+              @* }
+            else {
+                @Request.Cookies["Cookie"].Value;
+            }*@
+
 
         </dd>
 

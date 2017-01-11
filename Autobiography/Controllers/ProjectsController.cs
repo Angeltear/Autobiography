@@ -21,14 +21,28 @@ namespace Autobiography.Controllers
             return View(db.Projects.ToList());
         }
 
+        [HttpGet]
         // GET: Projects/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var ViewM = from o in db.Projects join o2 in db.Comments on o.ID equals o2.ProjectID where o.ID == o2.ProjectID && o.ID == (int)id select new ProjectsViewModel { Project = o, Comments = o2 };
+
+            return View(ViewM);
+        }
+
+        [HttpPost]
         public ActionResult Details(int? id, string txtComment)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //Projects projects = db.Projects.Find(id);
+
             Comment comments = new Comment();
 
             if (!(String.IsNullOrEmpty(txtComment)))
@@ -39,18 +53,14 @@ namespace Autobiography.Controllers
 
                 db.Comments.Add(comments);
                 db.SaveChanges();
+
+             //   HttpCookie cookie = new HttpCookie("Cookie");
+             //   cookie.Value = "You have already added a comment!";
+             //   ControllerContext.HttpContext.Response.Cookies.Add(cookie);
             }
-
-            Projects projects = db.Projects.Find(id);
-
-            ProjectsViewModel pvm = new ProjectsViewModel();
 
             var ViewM = from o in db.Projects join o2 in db.Comments on o.ID equals o2.ProjectID where o.ID == o2.ProjectID && o.ID == (int)id select new ProjectsViewModel { Project = o, Comments = o2 };
 
-            if (projects == null || pvm == null)
-            {
-                return HttpNotFound();
-            }
             return View(ViewM);
         }
 
