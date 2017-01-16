@@ -56,9 +56,9 @@ namespace Autobiography.Controllers
                 db.PendingComments.Add(comments);
                 db.SaveChanges();
 
-             //   HttpCookie cookie = new HttpCookie("Cookie");
-             //   cookie.Value = "You have already added a comment!";
-             //   ControllerContext.HttpContext.Response.Cookies.Add(cookie);
+                HttpCookie cookie = new HttpCookie("Cookie");
+                cookie.Value = "You have already added a comment!";
+                ControllerContext.HttpContext.Response.Cookies.Add(cookie);
             }
 
             var ViewM = from o in db.Projects join o2 in db.Comments on o.ID equals o2.ProjectID where o.ID == o2.ProjectID && o.ID == (int)id select new ProjectsViewModel { Project = o, Comments = o2 };

@@ -94,39 +94,74 @@
                 </table>
 
             </div>
-
-            @*@if (Request.Cookies["Cookie"] == null)
-            {*@
+            @if (!Request.IsAuthenticated)
+            {
+                <p>You must be logged in to write comment.</p>
+            }
+            else if (User.Identity.Name.Equals("admin@admin.com"))
+            {
                 <div id="addComment">
                     <hr />
                     @using (Html.BeginForm("Details", "Projects", FormMethod.Post))
                     {
 
-                    <table>
-                        <tr>
-                            <td>
-                                <textarea id="txtComment" name="txtComment" rows="4" cols="50"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="submit" value="Add" class="btn btn-default"/>
-                            </td>
-                        </tr>
-                    </table>
+                        <table>
+                            <tr>
+                                <td>
+                                    <textarea id="txtComment" name="txtComment" rows="4" cols="50"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="submit" value="Add" class="btn btn-default" />
+                                </td>
+                            </tr>
+                        </table>
 
                     }
                 </div>
-              @* }
-            else {
-                @Request.Cookies["Cookie"].Value;
-            }*@
+            }
+            else
+            {
+                if (Request.Cookies["Cookie"] == null)
+                {
+                    <div id="addComment">
+                        <hr />
+                        @using (Html.BeginForm("Details", "Projects", FormMethod.Post))
+                        {
 
+                            <table>
+                                <tr>
+                                    <td>
+                                        <textarea id="txtComment" name="txtComment" rows="4" cols="50"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="submit" value="Add" class="btn btn-default" />
+                                    </td>
+                                </tr>
+                            </table>
+
+                        }
+                    </div>
+                }
+                else
+                {
+                    @Request.Cookies["Cookie"].Value;
+                }
+
+            }
 
         </dd>
 
