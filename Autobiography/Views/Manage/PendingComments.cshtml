@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Autobiography.Models.PendingComments>
+@{
+    ViewBag.Title = "Pending Comments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-success">
+    <h2><u>Pending Comments</u></h2>
+</div>
+<br />
+
+<table style="display:table; width:100%">
+    <tr style="border-bottom: 1px solid #ccc">
+        <td>
+            <h4> <strong> @Html.DisplayNameFor(model => model.ProjectID) </strong> </h4>
+        </td>
+        <td>
+            <h4>  <strong> @Html.DisplayNameFor(model => model.SubmittedBy) </strong></h4>
+        </td>
+        <td>
+            <h4>  <strong> @Html.DisplayNameFor(model => model.CommentContent) </strong> </h4>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>
+            <p></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p></p>
+        </td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubmittedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CommentContent)
+            </td>
+            <td>
+                <p><a class="btn btn-default" href="@Url.Action("ApproveComment", "Manage", new {commentId=item.ID, prjID=item.ProjectID, submittedBy=item.SubmittedBy, commentContent=item.CommentContent})">Approve</a></p>
+                <p><a class="btn btn-default" href="@Url.Action("RejectComment", "Manage", new {commentId=item.ID, prjID=item.ProjectID, submittedBy=item.SubmittedBy, commentContent=item.CommentContent})">Reject</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p></p>
+            </td>
+        </tr>
+    }
+
+</table>
+

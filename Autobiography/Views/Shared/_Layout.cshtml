@@ -17,10 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @if (User.Identity.Name.Equals("admin@admin.com"))
-                {
-                    @Html.ActionLink("Autobiography", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                }                
+                    @Html.ActionLink("Autobiography", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })              
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">

@@ -26,4 +26,12 @@ namespace Autobiography.Models
 
         public Projects Projects { get; set; }
     }
+
+    public class PendingComments
+    {
+        public int ID { get; set; }
+        public string SubmittedBy { get; set; }
+        public string CommentContent { get; set; }
+        public int ProjectID { get; set; }
+    }
 }

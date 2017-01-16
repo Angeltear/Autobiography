@@ -11,34 +11,8 @@
     @Html.DisplayFor(model => item.Project.Title);
     break;
 }</h2>
-
-@*<script>
-
-    function com() {
-        alert("opa");
-        var newComment = $('#txtComment').val();
-        alert(newComment);
-        var projId = "1";
-        alert(projId);
-        $.ajax({
-            url: '/Projects/AddComments',
-            contentType: 'application/html; charset=utf-8',
-            data: { id: projId, newComment: newComment },
-            type: 'GET',
-            dataType: 'html'
-
-        })
-            .success(function (result) {
-                $('#comments').html(result);
-                alert(status);
-                parent.document.getElementById("txtComment").value = "";
-            })
-            .error(function (xhr, status) {
-                alert(status);
-            })
-    };
-</script>*@
-
+<br />
+@Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -50,10 +24,10 @@
         <dd>
             @*@Html.DisplayFor(model => model.Project.Type)*@
 
-
             @foreach (var item in Model)
             {
                 @Html.DisplayFor(model => item.Project.Type);
+                
                 break;
             }
         </dd>
@@ -63,8 +37,6 @@
         </dt>
 
         <dd>
-            @*@Html.DisplayFor(model => model.Project.Website)*@
-
             
             @foreach (var item in Model)
             {
@@ -79,7 +51,6 @@
         </dt>
 
         <dd>
-            @*@Html.DisplayFor(model => model.Project.GitHub)*@
 
             @foreach (var item in Model)
             {
@@ -94,11 +65,6 @@
         </dt>
 
         <dd>
-            @*@Html.DisplayFor(model => model.Comments.CommentContent)*@
-            @*@foreach (var item in Model)
-                {
-                    @Html.DisplayFor(model => item.Comments.CommentContent)
-                }*@
             <div id="comments">
 
 

@@ -15,6 +15,7 @@ namespace Autobiography.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public ManageController()
         {
@@ -333,7 +334,44 @@ namespace Autobiography.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        public ActionResult PendingComments()
+        {
+            return View(db.PendingComments.ToList());
+        }
+
+        public ActionResult ApproveComment(int commentId, int prjID, string submittedBy, string commentContent)
+        {
+            Comment comments = new Comment();
+
+            comments.ProjectID = prjID;
+            comments.CommentContent = commentContent;
+            comments.SubmittedBy = submittedBy;
+
+            // db.Comments.Add(comments);
+            db.Comments.Add(comments);
+            db.SaveChanges();
+
+            var pendingComment = db.PendingComments.SingleOrDefault(item => item.ID == commentId);
+
+                db.PendingComments.Remove(pendingComment);
+                db.SaveChanges();
+                       
+
+            return RedirectToAction("PendingComments", "Manage");
+        }
+
+        public ActionResult RejectComment(int commentId, int prjID, string submittedBy, string commentContent)
+        {
+
+            var pendingComment = db.PendingComments.SingleOrDefault(item => item.ID == commentId);
+
+            db.PendingComments.Remove(pendingComment);
+            db.SaveChanges();
+            
+            return RedirectToAction("PendingComments", "Manage");
+        }
+
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 

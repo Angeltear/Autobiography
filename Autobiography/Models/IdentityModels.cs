@@ -32,5 +32,6 @@ namespace Autobiography.Models
 
         public DbSet<Projects> Projects { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<PendingComments> PendingComments { get; set; }
     }
 }

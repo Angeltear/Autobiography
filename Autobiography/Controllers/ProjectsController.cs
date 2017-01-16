@@ -29,8 +29,8 @@ namespace Autobiography.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            var ViewM = from o in db.Projects join o2 in db.Comments on o.ID equals o2.ProjectID where o.ID == o2.ProjectID && o.ID == (int)id select new ProjectsViewModel { Project = o, Comments = o2 };
+            
+            var ViewM = from o in db.Projects  join o2 in db.Comments on o.ID equals o2.ProjectID where o.ID == o2.ProjectID && o.ID == id select new ProjectsViewModel { Project = o, Comments = o2 };
 
             return View(ViewM);
         }
@@ -43,7 +43,8 @@ namespace Autobiography.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Comment comments = new Comment();
+            //Comment comments = new Comment();
+            PendingComments comments = new PendingComments();
 
             if (!(String.IsNullOrEmpty(txtComment)))
             {
@@ -51,7 +52,8 @@ namespace Autobiography.Controllers
                 comments.CommentContent = txtComment;
                 comments.SubmittedBy = User.Identity.GetUserName().Substring(0, User.Identity.GetUserName().IndexOf("@"));
 
-                db.Comments.Add(comments);
+                // db.Comments.Add(comments);
+                db.PendingComments.Add(comments);
                 db.SaveChanges();
 
              //   HttpCookie cookie = new HttpCookie("Cookie");
