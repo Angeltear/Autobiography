@@ -5,9 +5,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+
 <div class="text-success">
     <h2><u>Projects</u></h2>
 </div>
+<br />
+
+@if (User.Identity.Name.Equals("admin@admin.com"))
+{
+    @Html.ActionLink("Add Project", "Create", null, new { @class = "btn btn-default" })
+}
+<br />
 <br />
 
 <table style="display:table; width:100%">
