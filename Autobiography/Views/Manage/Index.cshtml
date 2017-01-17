@@ -24,11 +24,14 @@
             
         </dd>
         <br />
-        <dt>Pending Comments:</dt>
-        <dd>
-            <p>
-                @Html.ActionLink("See pending comments", "PendingComments", null, new { @class = "btn btn-default" })
-            </p>
-        </dd>
+        @if (User.Identity.Name.Equals("admin@admin.com"))
+        {
+            <dt>Pending Comments:</dt>
+            <dd>
+                <p>
+                    @Html.ActionLink("See pending comments", "PendingComments", null, new { @class = "btn btn-default" })
+                </p>
+            </dd>
+        }        
     </dl>
 </div>

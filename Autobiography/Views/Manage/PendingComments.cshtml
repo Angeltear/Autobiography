@@ -8,47 +8,20 @@
     <h2><u>Pending Comments</u></h2>
 </div>
 <br />
-
-<table style="display:table; width:100%">
-    <tr style="border-bottom: 1px solid #ccc">
-        <td>
-            <h4> <strong> @Html.DisplayNameFor(model => model.ProjectID) </strong> </h4>
-        </td>
-        <td>
-            <h4>  <strong> @Html.DisplayNameFor(model => model.SubmittedBy) </strong></h4>
-        </td>
-        <td>
-            <h4>  <strong> @Html.DisplayNameFor(model => model.CommentContent) </strong> </h4>
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>
-            <p></p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <p></p>
-        </td>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
+@if (User.Identity.Name.Equals("admin@admin.com"))
+{
+    <table style="display:table; width:100%">
+        <tr style="border-bottom: 1px solid #ccc">
             <td>
-                @Html.DisplayFor(modelItem => item.ProjectID)
+                <h4> <strong> @Html.DisplayNameFor(model => model.ProjectID) </strong> </h4>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SubmittedBy)
+                <h4>  <strong> @Html.DisplayNameFor(model => model.SubmittedBy) </strong></h4>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CommentContent)
+                <h4>  <strong> @Html.DisplayNameFor(model => model.CommentContent) </strong> </h4>
             </td>
-            <td>
-                <p><a class="btn btn-default" href="@Url.Action("ApproveComment", "Manage", new {commentId=item.ID, prjID=item.ProjectID, submittedBy=item.SubmittedBy, commentContent=item.CommentContent})">Approve</a></p>
-                <p><a class="btn btn-default" href="@Url.Action("RejectComment", "Manage", new {commentId=item.ID, prjID=item.ProjectID, submittedBy=item.SubmittedBy, commentContent=item.CommentContent})">Reject</a></p>
-            </td>
+            <td></td>
         </tr>
         <tr>
             <td>
@@ -60,7 +33,40 @@
                 <p></p>
             </td>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubmittedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CommentContent)
+                </td>
+                <td>
+                    <p><a class="btn btn-default" href="@Url.Action("ApproveComment", "Manage", new { commentId = item.ID, prjID = item.ProjectID, submittedBy = item.SubmittedBy, commentContent = item.CommentContent })">Approve</a></p>
+                    <p><a class="btn btn-default" href="@Url.Action("RejectComment", "Manage", new { commentId = item.ID, prjID = item.ProjectID, submittedBy = item.SubmittedBy, commentContent = item.CommentContent })">Reject</a></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p></p>
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <h2>You have no permission to view this page.</h2>
+}
 
